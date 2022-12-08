@@ -1,6 +1,6 @@
 ---
-name: Task 이슈카드 템플릿
-about: Task 이슈카드 템플릿
+name: Task issue card 템플릿
+about: Task issue card 템플릿
 title: "[B000] 이슈카드 제목 설정하기"
 labels: ''
 assignees: ''
