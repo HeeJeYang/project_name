@@ -1,8 +1,8 @@
 ---
 name: Dev Log 템플릿
 about: Dev Log 템플릿
-title: "[✍️ Dev Log] 이름 / 2022-00-00"
-labels: ''
+title: "✍️ [Dev Log] 이름 / 2022-00-00"
+labels: dev-log
 assignees: ''
 
 ---

@@ -1,7 +1,7 @@
 ---
 name: Todo List 템플릿
 about: Todo List 템플릿
-title: "[프로젝트이름] Todo List"
+title: "\U0001F945 [프로젝트이름] Todo List"
 labels: ''
 assignees: HeeJeYang, Yonghyunc, KI-DG, eondo
 

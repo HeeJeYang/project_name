@@ -1,8 +1,8 @@
 ---
 name: KPT 회고 템플릿
 about: KPT 회고 템플릿
-title: "\U0001F4DC [KPT] N주차 0요일"
-labels: ''
+title: "\U0001F4C2 [KPT] N주차 0요일"
+labels: KPT
 assignees: ''
 
 ---
