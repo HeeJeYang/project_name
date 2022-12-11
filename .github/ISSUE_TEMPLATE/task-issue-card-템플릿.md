@@ -1,7 +1,7 @@
 ---
 name: Task issue card 템플릿
 about: Task issue card 템플릿
-title: "✨ [B000] 이슈카드 제목 설정하기"
+title: "✨ [B-000] 이슈카드 제목 설정하기"
 labels: ''
 assignees: ''
 
@@ -21,7 +21,7 @@ assignees: ''
 - Refactoring : 기능 변경 없이 코드 개선
 
 ### TASK 알파벳 분류
-- [B000] : 백엔드 Task
-- [F000] : 프론트엔드 Task
-- [C000] : 공통 Task
-- [E000] : 에러
+- [B-000] : 백엔드 Task
+- [F-000] : 프론트엔드 Task
+- [C-000] : 공통 Task
+- [E-000] : 에러
