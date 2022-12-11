@@ -8,6 +8,7 @@ class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ('username', 'nickname', 'message', 'image',)
+        
 
 
 class HistorySerializer(serializers.ModelSerializer):
@@ -15,3 +16,4 @@ class HistorySerializer(serializers.ModelSerializer):
     class Meta:
         model = History
         fields = '__all__'
+        read_only_fields = ('user', 'menuname',)
