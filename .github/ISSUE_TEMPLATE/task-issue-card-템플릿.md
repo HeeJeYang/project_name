@@ -1,13 +1,13 @@
 ---
 name: Task issue card 템플릿
 about: Task issue card 템플릿
-title: "✨ [F-000] 이슈카드 제목 설정하기"
+title: "✨ [B-000] 이슈카드 제목 설정하기"
 labels: ''
 assignees: ''
 
 ---
 
-###✍️ 할 일
+### ✍️ 할 일
 1. [ ] 토글 버튼 기능 추가 (예시)
 2. [ ] CSS 다듬기 (예시)
 
