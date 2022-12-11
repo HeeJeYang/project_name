@@ -1,13 +1,22 @@
 from django.db import models
-from django.contrib.auth.models import AbstractUser
+from django.contrib.auth.models import AbstractUser, BaseUserManager
 from django.conf import settings
 from foods.models import Menu
-# Create your models here.
+
+
+
 class User(AbstractUser):
-    nickname = models.CharField(max_length=50)
+    nickname = models.CharField(max_length=50, blank=False, unique=True)
     message = models.TextField(blank=True)
     image = models.ImageField(blank=True)
-    pass
+
+
+# class UserManager(BaseUserManager):
+#     def create_user(self, username='', nickname='', password=None, **extra_fields):
+#         extra_fields.setdefault('is_staff', False)
+#         extra_fields.setdefault('is_superuser', False)
+#         return self._create_user(username, nickname, password, **extra_fields)
+
 
 
 class History(models.Model):
