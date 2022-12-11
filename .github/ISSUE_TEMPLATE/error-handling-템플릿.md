@@ -1,7 +1,7 @@
 ---
 name: Error Handling 템플릿
 about: Error Handling 템플릿
-title: "⚠️ [E000] 에러 발생 제목 설정하기"
+title: "⚠️ [E-000] 에러 발생 제목 설정하기"
 labels: error
 assignees: ''
 
