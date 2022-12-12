@@ -34,5 +34,5 @@ class Recipe(models.Model):
 
 class Menu(models.Model):
     name = models.CharField(max_length=30)
-    recipe = models.OneToOneField(Recipe, on_delete=models.CASCADE)
-    image = models.CharField(max_length=100)
+    recipe = models.OneToOneField(Recipe, on_delete=models.CASCADE, blank=True)
+    image = models.CharField(max_length=100, blank=True)
