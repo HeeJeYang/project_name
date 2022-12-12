@@ -28,4 +28,4 @@ class HistorySerializer(serializers.ModelSerializer):
     class Meta:
         model = History
         fields = '__all__'
-        read_only_fields = ('user', 'menuname',)
+        read_only_fields = ('user',)
