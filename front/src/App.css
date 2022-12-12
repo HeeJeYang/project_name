@@ -184,3 +184,101 @@
   display: block;
   padding-bottom: 100%;
 }
+
+/* Page - Login */
+
+.Login {
+  width: 100%;
+
+  display: flex;
+}
+
+.Login .login_poster_wrapper {
+  width: 50%;
+}
+
+.Login .login_form_wrapper {
+  width: 50%;
+  position: relative;
+}
+
+/* Forms */
+
+/* Forms - LoginForm */
+
+.LoginForm {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  width: 70%;
+
+  padding-top: 30px;
+  padding-bottom: 30px;
+  padding-left: 100px;
+  padding-right: 100px;
+
+  border-radius: 30px;
+  background-color: #ececec;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 27px 0px;
+}
+
+.LoginForm .login_form_title {
+  text-align: center;
+  
+  padding-bottom: 30px;
+}
+
+.LoginForm .login_form_username {
+  display: flex;
+  align-items: center;
+
+  padding-bottom: 10px;
+}
+
+.LoginForm .login_form_username svg {
+  padding-right: 20px;
+}
+
+
+.LoginForm .login_form_password {
+  display: flex;
+  align-items: center;
+
+  padding-bottom: 20px;
+}
+
+.LoginForm .login_form_password svg {
+  padding-right: 20px;
+}
+
+.LoginForm .login_form_button {
+  padding-bottom: 10px;
+}
+
+
+.LoginForm .login_form_button button {
+  width: 100%;
+}
+
+.LoginForm .login_form_option_line {
+  display: flex;
+  width: 100%;
+  align-items: center;
+
+  padding-bottom: 10px;
+}
+
+.LoginForm .login_form_option_line .line {
+  width: 40%;
+  border: 0;
+  height: 2px;
+  background-color: grey;
+}
+
+.LoginForm .login_form_option_line .text {
+  width: 20%;
+  text-align: center;
+  color: grey;
+}

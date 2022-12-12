@@ -1,7 +1,10 @@
 // Components
+import { useNavigate } from "react-router-dom";
 import HeaderMenu from "./HeaderMenu";
 
 const MyHeader = () => {
+  const navigate = useNavigate();
+
   return (
     <header className="MyHeader">
       <div className="header_info">
@@ -15,7 +18,7 @@ const MyHeader = () => {
           <input placeholder="검색창" />
         </div>
         <div className="header_profile_menu">
-          <div></div>
+          <div onClick={() => navigate("/login")}>테스트</div>
         </div>
       </div>
       <HeaderMenu />
