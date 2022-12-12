@@ -1,10 +1,10 @@
 /* App */
 
-.App {
+/* .App {
   margin: 0px;
   padding: 0px;
-  width: 100vw;
-}
+  width: 100vw;  
+} */
 
 /* MyHeader */
 
@@ -32,7 +32,7 @@
 
 
   display: flex;
-  justify-content: start;
+  justify-content: flex-start;
 }
 
 .MyHeader .header_info .header_logo img {
@@ -64,7 +64,7 @@
   padding-right: 1vw;
 
   display: flex;
-  justify-content: end;
+  justify-content: flex-end;
 }
 
 .MyHeader .header_info .header_profile_menu div {
@@ -89,4 +89,98 @@
   width: 100%;
   min-height: 40px;
   background-color: #ececec;
+}
+
+/* Main - Menu */
+
+.Menu {
+  position: relative;
+  width: 100%;
+}
+
+.Menu .MenuSection_wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+/* Main - MenuSection */
+
+.MenuSection {
+  width: calc(50% - 40px);
+  height: 300px;
+  padding: 20px;
+  background-color: #ececec;
+}
+
+.MenuSection .menu {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background-color: white;
+}
+
+.MenuSection .menu > div .menu_title {
+  font-weight: bold;
+  font-size: 18px;
+  
+  padding-bottom: 20px;
+}
+
+.MenuSection .menu_left_top > div {
+  position: absolute;
+  top: 5%;
+  left: 5%;
+  transform: translate(0%, 0%);
+
+  text-align: start;
+}
+
+.MenuSection .menu_right_top > div {
+  position: absolute;
+  top: 5%;
+  right: 5%;
+  transform: translate(0%, 0%);
+
+  text-align: end;
+}
+
+.MenuSection .menu_left_bottom > div {
+  position: absolute;
+  bottom: 5%;
+  left: 5%;
+  transform: translate(0%, 0%);
+
+  text-align: start;
+}
+
+.MenuSection .menu_right_bottom > div {
+  position: absolute;
+  bottom: 5%;
+  right: 5%;
+  transform: translate(0%, 0%);
+
+  text-align: end;
+}
+
+/* Main - MenuRecommend */
+
+.MenuRecommend {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  width: 30%;
+  border-radius: 50%;
+
+  z-index: 1;
+
+  background-color: grey;
+}
+
+.MenuRecommend:after {
+  content: "";
+  display: block;
+  padding-bottom: 100%;
 }
