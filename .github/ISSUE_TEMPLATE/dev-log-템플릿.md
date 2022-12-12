@@ -3,7 +3,7 @@ name: Dev Log 템플릿
 about: Dev Log 템플릿
 title: "✍️ [Dev Log] 2022-00-00"
 labels: dev-log
-assignees: HeeJeYang, Yonghyunc, KI-DG, eondo
+assignees: ''
 
 ---
 
