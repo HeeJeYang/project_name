@@ -1,9 +1,9 @@
 ---
 name: Dev Log 템플릿
 about: Dev Log 템플릿
-title: "✍️ [Dev Log] 이름 / 2022-00-00"
+title: "✍️ [Dev Log] 2022-00-00"
 labels: dev-log
-assignees: ''
+assignees: HeeJeYang, Yonghyunc, KI-DG, eondo
 
 ---
 
