@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .serializers import UserSerializer, HistorySerializer
+from .serializers import UserSerializer, HistorySerializer, MymenuSerializer
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.decorators import api_view
@@ -38,11 +38,19 @@ def history(request):
 
     elif request.method == 'POST':
         # if Menu.objects.filter(request.data.menuname)
-        print(request.data['menuname'].split(' '))
-        serialzier = HistorySerializer(data=request.data)
-        if serialzier.is_valid(raise_exception=True):
-            serialzier.save(user=request.user.id)
-            return Response(serialzier.data, status=status.HTTP_201_CREATED)
+        history_serialzier = HistorySerializer(data=request.data)
+        if history_serialzier.is_valid(raise_exception=True):
+            history_serialzier.save(user=request.user)
+
+            menunames = request.data['menuname'].strip().split(' ')
+            for i in range(len(menunames)):
+                inst = {'name': menunames[i]}
+                mymenu_serializer = MymenuSerializer(data=inst)
+                if mymenu_serializer.is_valid():
+                    history = History.objects.latest('id')
+                    mymenu_serializer.save(history=history)
+
+            return Response(history_serialzier.data, status=status.HTTP_201_CREATED)
 
 
 @api_view(['GET', 'PUT', 'DELETE'])
@@ -53,4 +61,4 @@ def history_detail(request, history_pk):
         serialzier = HistorySerializer(history)
         return Response(serialzier.data)
 
-    
+
