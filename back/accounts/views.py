@@ -38,9 +38,9 @@ def history(request):
 
     elif request.method == 'POST':
         # if Menu.objects.filter(request.data.menuname)
-        history_serialzier = HistorySerializer(data=request.data)
-        if history_serialzier.is_valid(raise_exception=True):
-            history_serialzier.save(user=request.user)
+        history_serializer = HistorySerializer(data=request.data)
+        if history_serializer.is_valid(raise_exception=True):
+            history_serializer.save(user=request.user)
 
             menunames = request.data['menuname'].strip().split(' ')
             for i in range(len(menunames)):
@@ -50,7 +50,7 @@ def history(request):
                     history = History.objects.latest('id')
                     mymenu_serializer.save(history=history)
 
-            return Response(history_serialzier.data, status=status.HTTP_201_CREATED)
+            return Response(history_serializer.data, status=status.HTTP_201_CREATED)
 
 
 @api_view(['GET', 'PUT', 'DELETE'])
