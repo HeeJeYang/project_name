@@ -1,3 +1,4 @@
+// Components
 import MainMenu from "../components/Main/Menu";
 
 const Main = () => {
