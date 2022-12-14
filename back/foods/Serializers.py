@@ -19,16 +19,18 @@ class RecipeSerializer(serializers.ModelSerializer):
     class Meta:
         model = Recipe
         fields = '__all__'
+        read_only_fields = ('like_users', )
 
 
 
 # 단일 메뉴
 class MenuSerializer(serializers.ModelSerializer):
-    recipe = RecipeSerializer(read_only=True)
+    # recipe = RecipeSerializer(read_only=True)
 
     class Meta:
         model = Menu
         fields = '__all__'
+        read_only_fields = ('recipe', )
 
 
 
@@ -38,6 +40,7 @@ class MenuListSerializer(serializers.ModelSerializer):
     class Meta:
         model = Menu
         fields = ('name', 'image',)
+        read_only_fields = ('recipe', )
 
 
 
