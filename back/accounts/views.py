@@ -27,7 +27,7 @@ def profile(request, username):
         return Response(status=status.HTTP_401_UNAUTHORIZED)
 
 
-# 전체 히스토리 조회
+# 전체 히스토리 조회 및 새로운 히스토리 생성(POST)
 @api_view(['GET', 'POST'])
 def history(request):
 
@@ -39,12 +39,13 @@ def history(request):
     elif request.method == 'POST':
         # if Menu.objects.filter(request.data.menuname)
         print(request.data['menuname'].split(' '))
-        serialzier = HistorySerializer(data=request.data)
-        if serialzier.is_valid(raise_exception=True):
-            serialzier.save(user=request.user.id)
-            return Response(serialzier.data, status=status.HTTP_201_CREATED)
+        serializer = HistorySerializer(data=request.data)
+        if serializer.is_valid(raise_exception=True):
+            serializer.save(user=request.user.id)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 
+# 개별 히스토리 작업
 @api_view(['GET', 'PUT', 'DELETE'])
 def history_detail(request, history_pk):
 
