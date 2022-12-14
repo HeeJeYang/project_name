@@ -15,7 +15,7 @@ def menu(request):
     elif request.method == 'POST':
         serializer = MenuSerializer(data=request.data)
         if serializer.is_valid(raise_exception=True):
-            serializer.save()
+            serializer.save(recipe=Recipe.objects.get(pk=4))
             return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 
@@ -24,6 +24,5 @@ def recipe(request):
     if request.method == 'POST':
         serializer = RecipeSerializer(data=request.data)
         if serializer.is_valid(raise_exception=True):
-            recipe = RecipeSerializer(Recipe.objects.get(pk=1))
-            serializer.save(recipe=recipe)
+            serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
