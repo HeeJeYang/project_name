@@ -10,6 +10,7 @@
 
 .MyHeader {
   width: 100%;
+  height: 20vh;
 
   padding-bottom: 1vw;
 }
@@ -189,17 +190,66 @@
 
 .Login {
   width: 100%;
+  height: 80vh;
 
   display: flex;
 }
 
 .Login .login_poster_wrapper {
   width: 50%;
+  height: 100%;
+}
+
+.Login .login_poster_wrapper img {
+  width: 100%;
+  height: 100%;
 }
 
 .Login .login_form_wrapper {
   width: 50%;
+  height: 100%;
   position: relative;
+}
+
+/* Page - SignUp */
+
+.SignUp {
+  width: 100%;
+  height: 80vh;
+}
+
+@media (min-width: 768px) {
+
+  .SignUp .big_screen {
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+  }
+
+  .SignUp .big_screen .signup_poster_wrapper {
+    width: 50%;
+    height: 100%;
+  }
+
+  .SignUp .big_screen .signup_poster_wrapper img {
+    width: 100%;
+    height: 100%;
+  }
+
+  .SignUp .big_screen .signup_form_wrapper {
+    width: 50%;
+    height: 100%;
+    position: relative;
+  }
+}
+
+@media (max-width: 768px) {
+  .SignUp .small_screen {
+    width: 100%;
+    height: 100%;
+    position: relative;
+  }
 }
 
 /* Forms */
@@ -213,11 +263,12 @@
   transform: translate(-50%, -50%);
 
   width: 70%;
+  height: 80%;
 
-  padding-top: 30px;
-  padding-bottom: 30px;
-  padding-left: 100px;
-  padding-right: 100px;
+  padding-top: 5vh;
+  padding-bottom: 5vh;
+  padding-left: 5vw;
+  padding-right: 5vw;
 
   border-radius: 30px;
   background-color: #ececec;
@@ -281,4 +332,57 @@
   width: 20%;
   text-align: center;
   color: grey;
+}
+
+/* Forms - LoginForm */
+
+.SignUpForm {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  width: 70%;
+  height: 80%;
+
+  padding-top: 5vh;
+  padding-bottom: 5vh;
+  padding-left: 5vw;
+  padding-right: 5vw;
+
+  border-radius: 30px;
+  background-color: #ececec;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 27px 0px;
+}
+
+.SignUpForm .signup_form_title {
+  text-align: center;
+  
+  padding-bottom: 30px;
+}
+
+.SignUpForm .signup_form_input {
+  display: flex;
+  align-items: center;
+
+  padding-bottom: 10px;
+}
+
+.SignUpForm .signup_form_input svg {
+  padding-right: 20px;
+}
+
+.SignUpForm .signup_form_button_wrapper {
+  padding-top: 40px;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.SignUpForm .signup_form_button_wrapper .signup_form_button {
+  padding-bottom: 10px;
+}
+
+.SignUpForm .signup_form_button_wrapper .signup_form_button button {
+  width: 100%;
 }

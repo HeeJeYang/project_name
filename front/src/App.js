@@ -11,6 +11,7 @@ import { faUser, faLock } from "@fortawesome/free-solid-svg-icons";
 // Pages
 import Main from "./pages/Main";
 import Login from "./pages/Login";
+import SignUp from "./pages/SignUp";
 
 // Components
 import Container from "react-bootstrap/Container";
@@ -26,6 +27,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Main />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<SignUp />} />
         </Routes>
       </Container>
     </BrowserRouter>
