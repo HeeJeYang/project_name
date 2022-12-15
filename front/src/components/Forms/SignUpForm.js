@@ -3,8 +3,6 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 // Components
-import Form from "react-bootstrap/Form";
-import Button from "react-bootstrap/Button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const SignUpForm = ({ handleResponseSuccess }) => {
@@ -52,13 +50,13 @@ const SignUpForm = ({ handleResponseSuccess }) => {
   const navigate = useNavigate();
 
   return (
-    <Form className="SignUpForm" onSubmit={(e) => e.preventDefault()}>
+    <form className="SignUpForm" onSubmit={(e) => e.preventDefault()}>
       <div className="signup_form_title">
         <h2>SIGNUP</h2>
       </div>
       <div className="signup_form_input">
         <FontAwesomeIcon icon="fa-solid fa-user" />
-        <Form.Control
+        <input
           type="text"
           placeholder="아이디"
           autoComplete="username"
@@ -67,7 +65,7 @@ const SignUpForm = ({ handleResponseSuccess }) => {
       </div>
       <div className="signup_form_input">
         <FontAwesomeIcon icon="fa-solid fa-user" />
-        <Form.Control
+        <input
           type="text"
           placeholder="닉네임"
           autoComplete="nickname"
@@ -76,7 +74,7 @@ const SignUpForm = ({ handleResponseSuccess }) => {
       </div>
       <div className="signup_form_input">
         <FontAwesomeIcon icon="fa-solid fa-lock" />
-        <Form.Control
+        <input
           type="password"
           placeholder="비밀번호"
           autoComplete="current-password"
@@ -85,7 +83,7 @@ const SignUpForm = ({ handleResponseSuccess }) => {
       </div>
       <div className="signup_form_input">
         <FontAwesomeIcon icon="fa-solid fa-lock" />
-        <Form.Control
+        <input
           type="password"
           placeholder="비밀번호 확인"
           autoComplete="check-password"
@@ -97,17 +95,17 @@ const SignUpForm = ({ handleResponseSuccess }) => {
       </div>
       <div className="signup_form_button_wrapper">
         <div className="signup_form_button">
-          <Button type="submit" variant="secondary" onClick={handleSignUp}>
+          <button type="submit" variant="secondary" onClick={handleSignUp}>
             가입하기
-          </Button>
+          </button>
         </div>
         <div className="signup_form_button">
-          <Button onClick={() => navigate("/login")} variant="secondary">
+          <button onClick={() => navigate("/login")} variant="secondary">
             취소
-          </Button>
+          </button>
         </div>
       </div>
-    </Form>
+    </form>
   );
 };
 

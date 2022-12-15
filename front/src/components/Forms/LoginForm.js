@@ -3,8 +3,6 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 // Components
-import Form from "react-bootstrap/Form";
-import Button from "react-bootstrap/Button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const LoginForm = ({ handleResponseSuccess }) => {
@@ -43,13 +41,13 @@ const LoginForm = ({ handleResponseSuccess }) => {
   const navigate = useNavigate();
 
   return (
-    <Form className="LoginForm" onSubmit={(e) => e.preventDefault()}>
+    <form className="LoginForm" onSubmit={(e) => e.preventDefault()}>
       <div className="login_form_title">
         <h2>LOGIN</h2>
       </div>
       <div className="login_form_username">
         <FontAwesomeIcon icon="fa-solid fa-user" />
-        <Form.Control
+        <input
           type="text"
           placeholder="아이디"
           autoComplete="username"
@@ -58,7 +56,7 @@ const LoginForm = ({ handleResponseSuccess }) => {
       </div>
       <div className="login_form_password">
         <FontAwesomeIcon icon="fa-solid fa-lock" />
-        <Form.Control
+        <input
           type="password"
           placeholder="비밀번호"
           autoComplete="current-password"
@@ -69,14 +67,14 @@ const LoginForm = ({ handleResponseSuccess }) => {
         <span>{errorMessage}</span>
       </div>
       <div className="login_form_button">
-        <Button type="submit" variant="secondary" onClick={handleLogin}>
+        <button type="submit" variant="secondary" onClick={handleLogin}>
           로그인
-        </Button>
+        </button>
       </div>
       <div className="login_form_button">
-        <Button onClick={() => navigate("/signup")} variant="secondary">
+        <button onClick={() => navigate("/signup")} variant="secondary">
           회원가입
-        </Button>
+        </button>
       </div>
       <div className="login_form_option_line">
         <div className="line"></div>
@@ -85,12 +83,12 @@ const LoginForm = ({ handleResponseSuccess }) => {
       </div>
       <div className="login_form_button">
         {/* <Button>구글로 로그인</Button> */}
-        <Button variant="light">
+        <button variant="light">
           <FontAwesomeIcon icon="fa-brands fa-google" />
           <span> 구글로 로그인</span>
-        </Button>
+        </button>
       </div>
-    </Form>
+    </form>
   );
 };
 
