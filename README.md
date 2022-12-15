@@ -17,5 +17,16 @@
 <br><br>
 
 ### URL
+|          기능          |                   URL                    |
+| :--------------------: | :--------------------------------------: |
+|        회원가입        |            /accounts/signup/             |
+|         로그인         |             /accounts/login/             |
+| 회원정보 조회 및 수정  |  /accounts/user/profile/<str:username>/  |
+| 전체 식단 조회 및 생성 |         /accounts/user/history/          |
+|     개별 식단 CRUD     | /accounts/user/history/<int:history_pk>/ |
+|     전체 메뉴 조회     |               /foods/menu/               |
+|    전체 레시피 조회    |              /foods/recipe/              |
 
-회원정보 조회 및 수정  : /accounts/user/profile/      
+
+⭐식단 입력 받을 때 menuname 반드시 공백 기준으로 각각의 메뉴 나눈 하나의 문자열로 입력해주세요!!     
+ex) `마라탕 꿔바로우`
