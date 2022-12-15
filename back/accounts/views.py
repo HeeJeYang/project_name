@@ -27,7 +27,7 @@ def profile(request, username):
         return Response(status=status.HTTP_401_UNAUTHORIZED)
 
 
-# 전체 히스토리 조회
+# 전체 히스토리 조회 및 새로운 히스토리 생성(POST)
 @api_view(['GET', 'POST'])
 def history(request):
 
