@@ -12,6 +12,8 @@
 [B-005~7] selializers 작성    
 [B-008] 회원가입, 로그인, 로그아웃    
 [B-009] 회원정보 조회 및 수정     
+[B-010] 유저 식단 CRUD 
+[B-011] 메뉴, 레시피, 재료 조회 및 검색
 
 
 <br><br>
@@ -26,6 +28,10 @@
 |     개별 식단 CRUD     | /accounts/user/history/<int:history_pk>/ |
 |     전체 메뉴 조회     |               /foods/menu/               |
 |    전체 레시피 조회    |              /foods/recipe/              |
+|    개별 레시피 조회    |      /foods/recipe/<int:recipe_pk>       |
+|       메뉴 검색        |           /foods/menu/search/            |
+|   레시피 검색 (재료)   |          /foods/recipe/search/           |
+
 
 
 ⭐식단 입력 받을 때 menuname 반드시 공백 기준으로 각각의 메뉴 나눈 하나의 문자열로 입력해주세요!!     
