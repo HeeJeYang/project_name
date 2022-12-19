@@ -84,3 +84,18 @@ def ingredient(request):
         serializer.save()
         return Response(serializer.data, status=status.HTTP_201_CREATED)
 
+
+@api_view(['POST'])
+def like_recipe(request, recipe_pk):
+    recipe = Recipe.objects.get(pk=recipe_pk)
+    if recipe.like_users.filter(pk=request.user.pk).exists():
+        recipe.like_users.remove(request.user)
+        is_liked = False
+    else:
+        recipe.like_users.add(request.user)
+        is_liked = True
+    context = {
+        'is_liked': is_liked,
+        'like_users_count': recipe.like_users.count(),
+    }
+    return Response(context, status=status.HTTP_200_OK)
