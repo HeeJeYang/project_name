@@ -3,7 +3,14 @@ from rest_framework import status
 from rest_framework.decorators import api_view
 from .serializers import MenuListSerializer, MenuSerializer, RecipeListSerializer, RecipeSerializer, IngredientSerializer
 from .models import Menu, Recipe, Ingredient
+from accounts.models import History, Mymenu
+from accounts.serializers import HistorySerializer, MymenuSerializer
 from django.db.models import Q
+from datetime import datetime
+import datetime as dt
+from django.utils.dateformat import DateFormat
+import random
+
 
 # Create your views here.
 @api_view(['GET', 'POST'])
@@ -17,7 +24,7 @@ def menu(request):
     elif request.method == 'POST':
         serializer = MenuSerializer(data=request.data)
         if serializer.is_valid(raise_exception=True):
-            serializer.save(recipe=Recipe.objects.get(pk=4))
+            serializer.save(recipe=Recipe.objects.get(pk=24))
             return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 
@@ -101,3 +108,69 @@ def ingredient(request):
         serializer.save()
         return Response(serializer.data, status=status.HTTP_201_CREATED)
 
+
+@api_view(['POST'])
+def like_recipe(request, recipe_pk):
+    recipe = Recipe.objects.get(pk=recipe_pk)
+    if recipe.like_users.filter(pk=request.user.pk).exists():
+        recipe.like_users.remove(request.user)
+        is_liked = False
+    else:
+        recipe.like_users.add(request.user)
+        is_liked = True
+    context = {
+        'is_liked': is_liked,
+        'like_users_count': recipe.like_users.count(),
+    }
+    return Response(context, status=status.HTTP_200_OK)
+
+
+@api_view(['GET'])
+def menu_recommend(request):
+    
+    # 1. 일주일 내 먹은 메뉴 찾기
+    today = datetime.today()
+    week_ago = DateFormat(today - dt.timedelta(days=7)).format('Y-m-d')
+    history = History.objects.filter(
+        Q (date__gte=week_ago) &
+        Q (date__lte=today) 
+    )
+
+    # 2. 날짜별 가중치 부여
+    ate = []
+    day_diff = []
+    
+    for i in range(history.count()):
+        dtc = datetime.strptime(str(history[i].date).replace('-', ''), "%Y%m%d")
+
+        mymenu = Mymenu.objects.filter(history_id=history[i].id)
+        for j in range(mymenu.count()):
+            ate.append(mymenu[j].name)
+            diff = today - dtc
+            day_diff.append(diff.days)
+    
+    print(ate)
+    print(day_diff)
+
+    # 3. 랜덤으로 메뉴 추천 (가중치 O)
+    menus_obj = Menu.objects.all()
+    menus = []
+    weights = []
+
+    ate_len = len(ate)
+
+    for k in range(menus_obj.count()):
+        menus.append(menus_obj[k])      # 일단 object 자체를 리스트 안에 넣자!
+        weights.append(10)
+        for idx in range(ate_len):
+            if ate[idx] == menus_obj[k].name:
+                if weights[k] > day_diff[idx]:
+                    weights[k] = day_diff[idx]    
+
+    print(menus)
+    print(weights)
+
+    recommend_menu = random.choices(menus, weights=weights, k=1)
+    # print(recommend_menu)
+    serializer = MenuListSerializer(*recommend_menu)
+    return Response(serializer.data)
