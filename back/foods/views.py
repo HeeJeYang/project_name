@@ -89,6 +89,21 @@ def recipe_search(request):
     searchs = searchs.strip().split(' ')
     search_cnt = len(searchs)
 
+    # searches = search.strip().split(' ')
+    # print(searches)
+
+    # if searches:
+    #     result = 0
+    #     for search_keyword in searches:
+    #         if result == 0:
+    #             result = recipes.filter(
+    #                 ingredient__name__icontains=search_keyword
+    #             )
+    #         else:
+    #             result = result.filter(
+    #                 ingredient__name__icontains=search_keyword
+    #             )
+
     if searchs:
         q = Q()
         
