@@ -3,7 +3,7 @@ from rest_framework import status
 from rest_framework.decorators import api_view
 from .serializers import MenuListSerializer, MenuSerializer, RecipeListSerializer, RecipeSerializer, IngredientSerializer
 from .models import Menu, Recipe, Ingredient
-from django.db.models import Q
+from django.db.models import Q, Count
 
 # Create your views here.
 @api_view(['GET', 'POST'])
@@ -46,18 +46,13 @@ def recipe(request):
             recipe = Recipe.objects.latest('id')
             for i in range(len(ingredients)):
                 ing = Ingredient.objects.filter(name=ingredients[i])
-                print(ingredients[i], ing)
                 if not ing:
                     data = {'name': ingredients[i]}
-                    print(data)
                     ing_serializer = IngredientSerializer(data=data)
                     if ing_serializer.is_valid(raise_exception=True):
                         ing_serializer.save()
-                        print('저장함')
-                    ing = Ingredient.objects.last()
-                    
-                print(ing)
-                recipe.ingredient.add(ing[0].pk)
+                        ing = Ingredient.objects.last()
+                recipe.ingredient.add(ing[0].id)
         return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 
@@ -84,12 +79,20 @@ def menu_search(request):
 @api_view(['GET'])
 def recipe_search(request):
     recipes = Recipe.objects.all()
-    search = request.GET.get('search', '')
-    if search:
-        search_list = recipes.filter(
-            Q (ingredient__name__icontains=search) 
-        ).distinct()
-        serializer = RecipeListSerializer(search_list, many=True)
+    searchs = request.GET.get('search', '')
+    searchs = searchs.strip().split(' ')
+    search_cnt = len(searchs)
+
+    if searchs:
+        q = Q()
+        
+        for search in searchs:
+            q.add(Q (ingredient__name__icontains=search), q.OR)
+        
+        search_list = recipes.filter(q)
+        final_list = search_list.annotate(count=Count('id')).filter(count=search_cnt)
+
+        serializer = RecipeListSerializer(final_list, many=True)
         return Response(serializer.data)
 
 
