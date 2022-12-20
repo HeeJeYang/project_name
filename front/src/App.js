@@ -1,6 +1,7 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap/dist/js/bootstrap.bundle.min";
 import "./App.css";
 
 // FontAwesome
@@ -11,9 +12,11 @@ import { faUser, faLock } from "@fortawesome/free-solid-svg-icons";
 // Pages
 import Main from "./pages/Main";
 import Login from "./pages/Login";
+import SignUp from "./pages/SignUp";
+import Profile from "./pages/Profile";
+import Edit from "./pages/Edit";
 
 // Components
-import Container from "react-bootstrap/Container";
 import MyHeader from "./components/MyHeader";
 
 library.add(faUser, faLock, faGoogle);
@@ -21,13 +24,18 @@ library.add(faUser, faLock, faGoogle);
 function App() {
   return (
     <BrowserRouter>
-      <Container fluid className="App">
-        <MyHeader />
-        <Routes>
-          <Route path="/" element={<Main />} />
-          <Route path="/login" element={<Login />} />
-        </Routes>
-      </Container>
+      <div className="App">
+        <div className="container">
+          <MyHeader />
+          <Routes>
+            <Route path="/" element={<Main />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/signup" element={<SignUp />} />
+            <Route path="/profile" element={<Profile />} />
+            <Route path="/edit" element={<Edit />} />
+          </Routes>
+        </div>
+      </div>
     </BrowserRouter>
   );
 }
