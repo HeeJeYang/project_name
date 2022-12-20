@@ -2,7 +2,7 @@ from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.decorators import api_view
 from .serializers import MenuListSerializer, MenuSerializer, RecipeListSerializer, RecipeSerializer, IngredientSerializer
-from .models import Menu, Recipe
+from .models import Menu, Recipe, Ingredient
 from accounts.models import History, Mymenu
 from accounts.serializers import HistorySerializer, MymenuSerializer
 from django.db.models import Q
@@ -46,9 +46,26 @@ def recipe(request):
     if request.method == 'POST':
         serializer = RecipeSerializer(data=request.data)
         if serializer.is_valid(raise_exception=True):
-            ingredient = request.POST['ingredient']
-            serializer.save(ingredient=ingredient)
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
+            serializer.save()
+
+            ingredients = request.POST['ingredient'].strip().split(' ')
+            print(ingredients)
+            recipe = Recipe.objects.latest('id')
+            for i in range(len(ingredients)):
+                ing = Ingredient.objects.filter(name=ingredients[i])
+                print(ingredients[i], ing)
+                if not ing:
+                    data = {'name': ingredients[i]}
+                    print(data)
+                    ing_serializer = IngredientSerializer(data=data)
+                    if ing_serializer.is_valid(raise_exception=True):
+                        ing_serializer.save()
+                        print('저장함')
+                    ing = Ingredient.objects.last()
+                    
+                print(ing)
+                recipe.ingredient.add(ing[0].pk)
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 
 @api_view(['GET'])
