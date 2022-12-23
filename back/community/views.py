@@ -2,10 +2,12 @@ from django.shortcuts import render
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 
-from .models import Article, Comment
-from .serializers import ArticleListSerializer, ArticleSerializer, CommentSerializer
+from .models import Article, Comment, Category
+from .serializers import ArticleListSerializer, ArticleSerializer, CommentSerializer, CategorySerializer
 
 from rest_framework import status
+
+from django.db.models import Max, Count, Q
 
 # from django.http import JsonResponse
 
@@ -18,6 +20,7 @@ def article(request):
     if request.method == 'GET':
         articles = Article.objects.all()
         serializer = ArticleListSerializer(articles, many=True)
+        print(articles)
         return Response(serializer.data)
 
     # 게시물 생성
@@ -112,3 +115,76 @@ def comment_create(request, article_pk):
         if serializer.is_valid(raise_exception=True):
             serializer.save(article=article, user=request.user)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+
+# 카테고리 생성 테스트 용
+@api_view(['POST'])
+def article_category(request):
+    serializer = CategorySerializer(data=request.data)
+    if serializer.is_valid(raise_exception=True):
+        serializer.save()
+        return Response(serializer.data)
+
+
+@api_view(['GET'])
+def article_popular(request):
+
+    populars = []
+
+    for c_idx in range(1, 5):
+        popular = Article.objects.filter(category=c_idx)
+        popular = popular.annotate(count=Count('like_users'))
+        popular = popular.latest('count')
+
+        populars.append(popular)
+
+    serializer = ArticleListSerializer(populars, many=True)
+    return Response(serializer.data)
+    
+
+# 자유게시판 게시물 검색(제목/내용 기준 + 카테고리)
+@api_view(['GET'])
+def article_search_post(request):
+
+    search_post = request.GET.get('keyword', '')
+    search_category = request.GET.get('category', '')
+
+    if search_post:
+        if search_category in ['1', '2', '3', '4']:
+            search_list = Article.objects.filter(
+                Q (title__icontains=search_post) &
+                Q (category=search_category)
+            ).distinct()
+
+        else:
+            search_list = Article.objects.filter(
+                Q (title__icontains=search_post)
+            ).distinct()
+
+        serializer = ArticleListSerializer(search_list, many=True)
+        return Response(serializer.data)
+
+
+# 자유게시판 게시물 검색(닉네임/유저네임 기준 + 카테고리)
+@api_view(['GET'])
+def article_search_user(request):
+
+    search_user = request.GET.get('keyword', '')
+    search_category = request.GET.get('category', '')
+
+    if search_user:
+        if search_category in ['1', '2', '3', '4']:
+            search_list = Article.objects.filter(
+                (Q (user__nickname__icontains=search_user) |
+                Q (user__username__icontains=search_user)) &
+                Q (category=search_category)
+            ).distinct()
+        
+        else:
+            search_list = Article.objects.filter(
+                Q (user__nickname__icontains=search_user) |
+                Q (user__username__icontains=search_user)
+            ).distinct()
+
+        serializer = ArticleListSerializer(search_list, many=True)
+        return Response(serializer.data)
