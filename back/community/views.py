@@ -74,8 +74,41 @@ def article_detail(request, article_pk):
         return Response(like_status)
 
 
-# @api_view(['GET'])
-# def comment(request):
+# 상세 댓글 조회, 삭제, 수정
+@api_view(['GET', 'DELETE', 'PUT'])
+def comment_detail(request, comment_pk):
+
+    comment = Comment.objects.get(pk=comment_pk)
+    user = request.user
     
-#     if request.method == 'GET':
-#         comments = Comment.objects.
+    if request.method == 'GET':
+        serializer = CommentSerializer(comment)
+        return Response(serializer.data)
+
+    elif request.method == 'DELETE':
+        if comment.user_id == user.pk:
+            comment.delete()
+            return Response(status=status.HTTP_204_NO_CONTENT)
+        else:
+            return Response(status=status.HTTP_401_UNAUTHORIZED)
+    
+    elif request.method == 'PUT':
+        if comment.user_id == user.pk:
+            serializer = CommentSerializer(comment, data=request.data)
+            if serializer.is_valid(raise_exception=True):
+                serializer.save()
+                return Response(serializer.data)
+        else:
+            return Response(status=status.HTTP_401_UNAUTHORIZED)
+
+
+# 특정 게시물의 댓글 생성
+@api_view(['POST'])
+def comment_create(request, article_pk):
+    
+    if request.method == 'POST':
+        article = Article.objects.get(pk=article_pk)
+        serializer = CommentSerializer(data=request.data)
+        if serializer.is_valid(raise_exception=True):
+            serializer.save(article=article, user=request.user)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
