@@ -160,9 +160,18 @@ def article_search_post(request):
             search_list = Article.objects.filter(
                 Q (title__icontains=search_post)
             ).distinct()
+    
+    else:
+        if search_category in ['1', '2', '3', '4']:
+            search_list = Article.objects.filter(
+                Q (category=search_category)
+            ).distinct()
+        
+        else:   # 전체 보기 탭 눌렀을 경우
+            search_list = Article.objects.all()
 
-        serializer = ArticleListSerializer(search_list, many=True)
-        return Response(serializer.data)
+    serializer = ArticleListSerializer(search_list, many=True)
+    return Response(serializer.data)
 
 
 # 자유게시판 게시물 검색(닉네임/유저네임 기준 + 카테고리)
@@ -172,19 +181,27 @@ def article_search_user(request):
     search_user = request.GET.get('keyword', '')
     search_category = request.GET.get('category', '')
 
-    if search_user:
-        if search_category in ['1', '2', '3', '4']:
+    if search_user: # 
+        if search_category in ['1', '2', '3', '4']: # 검색 키워드O, 카테고리 선택O
             search_list = Article.objects.filter(
                 (Q (user__nickname__icontains=search_user) |
                 Q (user__username__icontains=search_user)) &
                 Q (category=search_category)
             ).distinct()
         
-        else:
+        else:   # 검색 키워드O, 카테고리 선택 X
             search_list = Article.objects.filter(
                 Q (user__nickname__icontains=search_user) |
                 Q (user__username__icontains=search_user)
             ).distinct()
+    else:       # 검색 키워드X, 카테고리 선택O
+        if search_category in ['1', '2', '3', '4']:
+            search_list = Article.objects.filter(
+                Q (category=search_category)
+            ).distinct()
+        
+        else:   # 검색 키워드X, 카테고리 선택 X == 전체 보기 탭 눌렀을 경우
+            search_list = Article.objects.all()
 
-        serializer = ArticleListSerializer(search_list, many=True)
-        return Response(serializer.data)
+    serializer = ArticleListSerializer(search_list, many=True)
+    return Response(serializer.data)
