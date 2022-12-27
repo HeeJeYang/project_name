@@ -8,7 +8,7 @@ const MyHeader = () => {
   return (
     <header className="MyHeader">
       <div className="header_info">
-        <div className="header_logo">
+        <div className="header_logo" onClick={() => navigate("/")}>
           <img
             src={`${process.env.PUBLIC_URL}/assets/ssafy_logo.png`}
             alt="header_logo"
