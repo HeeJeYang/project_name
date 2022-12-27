@@ -38,17 +38,34 @@ const Edit = () => {
             <div className="edit_user_profile_image_change_box">
               <div className="edit_user_profile_image_preview">
                 <img
+                  id="edit_user_profile_image_preview"
                   src={`${process.env.PUBLIC_URL}/assets/ssafy_logo.png`}
-                  alt="profile_image_proview"
+                  alt="profile_image_preview"
                 />
               </div>
-              <div className="edit_user_profile_change_image_box"></div>
+              <div className="edit_user_profile_change_image_box">
+                <input type="file" accept="image/*" />
+              </div>
             </div>
-            <div></div>
-            <div></div>
+            <div className="edit_user_profile_box">
+              <span>닉네임 :</span>
+              <span> 홍길동</span>
+              <button>변경</button>
+            </div>
+            <div className="edit_user_profile_box">
+              <span>자기소개 :</span>
+              <button>변경</button>
+            </div>
             <textarea></textarea>
-            <div></div>
-            <div></div>
+            <div className="edit_user_profile_box">
+              <span>비밀번호 변경 :</span>
+              <input type="text" />
+              <button>변경</button>
+            </div>
+            <div className="edit_user_profile_box">
+              <span>비밀번호 확인 :</span>
+              <input type="text" />
+            </div>
           </div>
         </div>
       </div>
