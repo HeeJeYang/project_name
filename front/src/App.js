@@ -7,7 +7,11 @@ import "./App.css";
 // FontAwesome
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { faGoogle } from "@fortawesome/free-brands-svg-icons";
-import { faUser, faLock } from "@fortawesome/free-solid-svg-icons";
+import {
+  faUser,
+  faLock,
+  faMagnifyingGlass,
+} from "@fortawesome/free-solid-svg-icons";
 
 // Pages
 import Main from "./pages/Main";
@@ -15,11 +19,12 @@ import Login from "./pages/Login";
 import SignUp from "./pages/SignUp";
 import Profile from "./pages/Profile";
 import Edit from "./pages/Edit";
+import Community from "./pages/Community";
 
 // Components
 import MyHeader from "./components/MyHeader";
 
-library.add(faUser, faLock, faGoogle);
+library.add(faUser, faLock, faGoogle, faMagnifyingGlass);
 
 function App() {
   return (
@@ -33,6 +38,7 @@ function App() {
             <Route path="/signup" element={<SignUp />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/edit" element={<Edit />} />
+            <Route path="/community" element={<Community />} />
           </Routes>
         </div>
       </div>
